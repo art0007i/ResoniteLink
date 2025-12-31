@@ -15,8 +15,11 @@ namespace ResoniteLink
         public string SlotID { get; set; }
 
         /// <summary>
-        /// How deep to fetch the hierarchy. Value of 0 will only fetch the requested slot fully.
-        /// The immediate children of slots beyond this depth will be fetched as references only.
+        /// How deep to fetch the hierarchy.
+        /// Value of 0 will fetch only the requested slot fully.
+        /// Value of 1 will fully fetch the immedaite children.
+        /// Value of -1 will fetch everything fully.
+        /// Any immediate children of slots beyond this depth will be fetched as references only.
         /// </summary>
         [JsonPropertyName("depth")]
         public int Depth { get; set; }
