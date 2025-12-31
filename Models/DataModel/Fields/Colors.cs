@@ -20,7 +20,7 @@ namespace ResoniteLink
         public float a { get; set; }
     }
 
-    public class Field_colorX : Field
+    public class Field_colorX : Field_color
     {
         [JsonPropertyName("profile")]
         public string Profile { get; set; }
