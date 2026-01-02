@@ -12,7 +12,7 @@ namespace ResoniteLink
 {
     public class LinkInterface : IDisposable
     {
-        const int BUFFER_SIZE = 1024 * 1024 * 32; // 32 MB
+        const int DEFAULT_BUFFER_SIZE = 1024 * 1024 * 2; // 2 MB
 
         public bool IsConnected => _client.State == WebSocketState.Open;
         public Exception FailureException { get; private set; }
@@ -51,17 +51,34 @@ namespace ResoniteLink
         {
             try
             {
-                byte[] buffer = new byte[BUFFER_SIZE];
+                byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+
+                int receivedBytes = 0;
 
                 while (!cancellationToken.IsCancellationRequested)
                 {
-                    var message = await _client.ReceiveAsync(new ArraySegment<byte>(buffer), cancellationToken);
+                    if(receivedBytes == buffer.Length)
+                    {
+                        // We need bigger buffer!
+                        var newBuffer = new byte[buffer.Length * 2];
+
+                        Array.Copy(buffer, newBuffer, buffer.Length);
+
+                        buffer = newBuffer;
+                    }
+
+                    var message = await _client.ReceiveAsync(new ArraySegment<byte>(buffer, receivedBytes, buffer.Length - receivedBytes), cancellationToken);
+
+                    receivedBytes += message.Count;
+
+                    if (!message.EndOfMessage)
+                        continue;
 
                     switch(message.MessageType)
                     {
                         case WebSocketMessageType.Text:
                             var response = System.Text.Json.JsonSerializer.Deserialize<Response>(
-                                new MemoryStream(buffer, 0, message.Count), _options);
+                                new MemoryStream(buffer, 0, receivedBytes), _options);
 
                             if (_pendingResponses.TryRemove(response.SourceMessageID, out var completion))
                                 completion.SetResult(response);
@@ -78,6 +95,8 @@ namespace ResoniteLink
                             cancellation.Cancel();
                             break;
                     }
+
+                    receivedBytes = 0;
                 }
             }
             catch(Exception ex)
@@ -105,10 +124,10 @@ namespace ResoniteLink
             if (!_pendingResponses.TryAdd(message.MessageID, responseCompletion))
                 throw new InvalidOperationException("Failed to register MessageID. Did you provide duplicate MessageID?");
 
-            var jsonData = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(message);
+            var jsonData = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes((Message)message);
 
             await _client.SendAsync(new ArraySegment<byte>(jsonData), 
-                WebSocketMessageType.Text, false, System.Threading.CancellationToken.None);
+                WebSocketMessageType.Text, true, System.Threading.CancellationToken.None);
 
             // Wait for response to arrive and cast it to the target type if compatible
             return await responseCompletion.Task as O;
