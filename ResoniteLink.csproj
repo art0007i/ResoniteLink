@@ -72,4 +72,8 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Assets\" />
+  </ItemGroup>
+
 </Project>
