@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace ResoniteLink
 {
@@ -9,6 +10,7 @@ namespace ResoniteLink
         LinkInterface _link;
 
         public Slot CurrentSlot { get; private set; }
+        public Component CurrentComponent { get; private set; }
 
         int _idPool;
 
@@ -41,6 +43,10 @@ namespace ResoniteLink
             Console.ForegroundColor = ConsoleColor.Cyan;
 
             Console.Write($"Slot: {CurrentSlot.Name.Value} (ID: {CurrentSlot.ID})");
+
+            if (CurrentComponent != null)
+                Console.Write($" Component: {CurrentComponent.ComponentType} (ID: {CurrentComponent.ID})");
+
             Console.Write(":");
 
             Console.ForegroundColor = prevColor;
@@ -105,7 +111,7 @@ namespace ResoniteLink
                         break;
                     }
 
-                    if(childIndex < 0 || childIndex >= CurrentSlot.Children.Count)
+                    if(childIndex < 0 || childIndex >= (CurrentSlot.Children?.Count ?? 0))
                     {
                         Console.WriteLine("Child Index is out of range");
                         break;
@@ -113,6 +119,38 @@ namespace ResoniteLink
 
                     await SelectSlot(CurrentSlot.Children[childIndex].ID);
 
+                    break;
+
+                case "selectcomponent":
+                    if (!int.TryParse(arguments, out var componentIndex))
+                    {
+                        Console.WriteLine("Could not parse component index");
+                        break;
+                    }
+
+                    if (componentIndex < 0 || componentIndex >= (CurrentSlot.Components?.Count ?? 0))
+                    {
+                        Console.WriteLine("Component Index is out of range");
+                        break;
+                    }
+
+                    await SelectComponent(CurrentSlot.Components[componentIndex].ID);
+                    break;
+
+                case "clearcomponent":
+                    CurrentComponent = null;
+                    break;
+
+                case "componentstate":
+                    await RefreshCurrent();
+
+                    if (CurrentComponent == null)
+                    {
+                        Console.WriteLine("No component is selected");
+                        break;
+                    }
+
+                    PrintComponentMembers();
                     break;
 
                 case "addchild":
@@ -128,7 +166,6 @@ namespace ResoniteLink
                     // Immediatelly select the new child
                     if (childId != null)
                         Console.WriteLine($"Child added. ID: {childId}");
-
                     break;
 
                 case "removeslot":
@@ -160,7 +197,10 @@ namespace ResoniteLink
 
         async Task RefreshCurrent()
         {
-            await SelectSlot(CurrentSlot.ID);
+            if (CurrentComponent != null)
+                await SelectComponent(CurrentComponent.ID);
+            else
+                await SelectSlot(CurrentSlot.ID);
         }
 
         async Task SelectSlot(string slotID)
@@ -181,6 +221,27 @@ namespace ResoniteLink
             }
 
             CurrentSlot = result.Data;
+            CurrentComponent = null;
+        }
+
+        async Task SelectComponent(string componentId)
+        {
+            // Fetch information about the slot we selected
+            var result = await _link.GetComponentData(new GetComponent()
+            {
+                ComponentID = componentId,
+            });
+
+            // If we failed (e.g. slot can be deleted in the meanwhile or the ID is wrong), we reset back to root
+            if (!result.Success)
+            {
+                Console.WriteLine($"Error! Failed to fetch component data: {result.ErrorInfo}");
+                return;
+            }
+
+            CurrentComponent = result.Data;
+
+            PrintComponentMembers();
         }
 
         async Task<string> AddChild(string name)
@@ -228,6 +289,76 @@ namespace ResoniteLink
 
             // Select the parent
             await SelectSlot(CurrentSlot.Parent.ID);
+        }
+
+        void PrintComponentMembers()
+        {
+            if (CurrentComponent == null)
+                throw new InvalidOperationException("No component is currently selected");
+
+            if(CurrentComponent == null)
+            {
+                Console.WriteLine("Component was destroyed in the meanwhile");
+                return;
+            }
+
+            // This should be pretty much impossible to happen, but let's handle it anyways
+            if(CurrentComponent.Members == null)
+            {
+                Console.WriteLine("Component has no members");
+                return;
+            }
+
+            foreach(var member in CurrentComponent.Members)
+                PrintMember(member.Value, member.Key);
+        }
+
+        void PrintMember(Member member, string name, int indentLevel = 0)
+        {
+            Console.Write($"{name} ({member.ID}): ".PadLeft(indentLevel, ' '));
+
+            switch (member)
+            {
+                case Field field:
+                    if (field.BoxedValue is null)
+                        Console.WriteLine("null");
+                    else
+                        Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(field.BoxedValue, new JsonSerializerOptions()
+                        {
+                            NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowNamedFloatingPointLiterals,
+                            // Since most of these are just fields, keep it compact
+                            WriteIndented = false
+                        }));
+                    break;
+
+                case Reference reference:
+                    Console.Write("Reference Target: ");
+
+                    if (reference.TargetID == null)
+                        Console.WriteLine("null");
+                    else
+                        Console.WriteLine(reference.TargetID);
+                    break;
+
+                case SyncList list:
+                    Console.WriteLine($"<List (Count: {list.Elements?.Count ?? 0})>");
+
+                    if (list.Elements != null)
+                        for (int i = 0; i < list.Elements.Count; i++)
+                            PrintMember(list.Elements[i], $"[{i}]", indentLevel + 1);
+                    break;
+
+                case SyncObject syncObject:
+                    Console.WriteLine("<Object>");
+
+                    foreach (var subMember in syncObject.Members)
+                        PrintMember(subMember.Value, subMember.Key, indentLevel + 1);
+                    break;
+
+                default:
+                    Console.WriteLine("Unsupported member type: " + member.GetType());
+                    break;
+            }
         }
     }
 }
