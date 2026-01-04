@@ -16,7 +16,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public byte Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (byte)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(byte);
         }
 
         [JsonDerivedType(typeof(Field_byte), "byte")]
@@ -28,7 +32,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public ushort Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (ushort)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(ushort);
         }
 
         [JsonDerivedType(typeof(Field_ushort), "ushort")]
@@ -40,7 +48,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public uint Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (uint)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(uint);
         }
 
         [JsonDerivedType(typeof(Field_uint), "uint")]
@@ -52,7 +64,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public ulong Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (ulong)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(ulong);
         }
 
         [JsonDerivedType(typeof(Field_ulong), "ulong")]
@@ -64,7 +80,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public sbyte Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (sbyte)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(sbyte);
         }
 
         [JsonDerivedType(typeof(Field_sbyte), "sbyte")]
@@ -76,7 +96,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public short Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (short)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(short);
         }
 
         [JsonDerivedType(typeof(Field_short), "short")]
@@ -88,7 +112,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public int Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (int)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(int);
         }
 
         [JsonDerivedType(typeof(Field_int), "int")]
@@ -100,7 +128,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public long Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (long)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(long);
         }
 
         [JsonDerivedType(typeof(Field_long), "long")]
@@ -112,7 +144,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public float Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (float)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(float);
         }
 
         [JsonDerivedType(typeof(Field_float), "float")]
@@ -124,7 +160,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public double Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (double)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(double);
         }
 
         [JsonDerivedType(typeof(Field_double), "double")]
@@ -136,7 +176,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public decimal Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (decimal)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(decimal);
         }
 
         [JsonDerivedType(typeof(Field_decimal), "decimal")]
@@ -148,7 +192,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public bool Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (bool)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(bool);
         }
 
         [JsonDerivedType(typeof(Field_bool), "bool")]
@@ -160,7 +208,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public char Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (char)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(char);
         }
 
         [JsonDerivedType(typeof(Field_char), "char")]
@@ -172,7 +224,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public string Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (string)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(string);
         }
 
         [JsonDerivedType(typeof(Field_string), "string")]
@@ -184,7 +240,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public color Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (color)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(color);
         }
 
         [JsonDerivedType(typeof(Field_color), "color")]
@@ -196,7 +256,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public colorX Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (colorX)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(colorX);
         }
 
         [JsonDerivedType(typeof(Field_colorX), "colorX")]
@@ -208,7 +272,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public color32 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (color32)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(color32);
         }
 
         [JsonDerivedType(typeof(Field_color32), "color32")]
@@ -220,7 +288,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public float2 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (float2)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(float2);
         }
 
         [JsonDerivedType(typeof(Field_float2), "float2")]
@@ -232,7 +304,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public double2 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (double2)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(double2);
         }
 
         [JsonDerivedType(typeof(Field_double2), "double2")]
@@ -244,7 +320,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public byte2 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (byte2)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(byte2);
         }
 
         [JsonDerivedType(typeof(Field_byte2), "byte2")]
@@ -256,7 +336,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public ushort2 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (ushort2)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(ushort2);
         }
 
         [JsonDerivedType(typeof(Field_ushort2), "ushort2")]
@@ -268,7 +352,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public uint2 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (uint2)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(uint2);
         }
 
         [JsonDerivedType(typeof(Field_uint2), "uint2")]
@@ -280,7 +368,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public ulong2 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (ulong2)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(ulong2);
         }
 
         [JsonDerivedType(typeof(Field_ulong2), "ulong2")]
@@ -292,7 +384,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public sbyte2 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (sbyte2)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(sbyte2);
         }
 
         [JsonDerivedType(typeof(Field_sbyte2), "sbyte2")]
@@ -304,7 +400,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public short2 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (short2)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(short2);
         }
 
         [JsonDerivedType(typeof(Field_short2), "short2")]
@@ -316,7 +416,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public int2 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (int2)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(int2);
         }
 
         [JsonDerivedType(typeof(Field_int2), "int2")]
@@ -328,7 +432,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public long2 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (long2)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(long2);
         }
 
         [JsonDerivedType(typeof(Field_long2), "long2")]
@@ -340,7 +448,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public bool2 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (bool2)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(bool2);
         }
 
         [JsonDerivedType(typeof(Field_bool2), "bool2")]
@@ -352,7 +464,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public float3 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (float3)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(float3);
         }
 
         [JsonDerivedType(typeof(Field_float3), "float3")]
@@ -364,7 +480,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public double3 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (double3)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(double3);
         }
 
         [JsonDerivedType(typeof(Field_double3), "double3")]
@@ -376,7 +496,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public byte3 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (byte3)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(byte3);
         }
 
         [JsonDerivedType(typeof(Field_byte3), "byte3")]
@@ -388,7 +512,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public ushort3 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (ushort3)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(ushort3);
         }
 
         [JsonDerivedType(typeof(Field_ushort3), "ushort3")]
@@ -400,7 +528,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public uint3 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (uint3)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(uint3);
         }
 
         [JsonDerivedType(typeof(Field_uint3), "uint3")]
@@ -412,7 +544,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public ulong3 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (ulong3)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(ulong3);
         }
 
         [JsonDerivedType(typeof(Field_ulong3), "ulong3")]
@@ -424,7 +560,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public sbyte3 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (sbyte3)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(sbyte3);
         }
 
         [JsonDerivedType(typeof(Field_sbyte3), "sbyte3")]
@@ -436,7 +576,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public short3 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (short3)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(short3);
         }
 
         [JsonDerivedType(typeof(Field_short3), "short3")]
@@ -448,7 +592,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public int3 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (int3)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(int3);
         }
 
         [JsonDerivedType(typeof(Field_int3), "int3")]
@@ -460,7 +608,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public long3 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (long3)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(long3);
         }
 
         [JsonDerivedType(typeof(Field_long3), "long3")]
@@ -472,7 +624,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public bool3 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (bool3)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(bool3);
         }
 
         [JsonDerivedType(typeof(Field_bool3), "bool3")]
@@ -484,7 +640,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public float4 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (float4)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(float4);
         }
 
         [JsonDerivedType(typeof(Field_float4), "float4")]
@@ -496,7 +656,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public double4 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (double4)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(double4);
         }
 
         [JsonDerivedType(typeof(Field_double4), "double4")]
@@ -508,7 +672,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public byte4 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (byte4)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(byte4);
         }
 
         [JsonDerivedType(typeof(Field_byte4), "byte4")]
@@ -520,7 +688,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public ushort4 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (ushort4)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(ushort4);
         }
 
         [JsonDerivedType(typeof(Field_ushort4), "ushort4")]
@@ -532,7 +704,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public uint4 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (uint4)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(uint4);
         }
 
         [JsonDerivedType(typeof(Field_uint4), "uint4")]
@@ -544,7 +720,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public ulong4 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (ulong4)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(ulong4);
         }
 
         [JsonDerivedType(typeof(Field_ulong4), "ulong4")]
@@ -556,7 +736,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public sbyte4 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (sbyte4)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(sbyte4);
         }
 
         [JsonDerivedType(typeof(Field_sbyte4), "sbyte4")]
@@ -568,7 +752,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public short4 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (short4)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(short4);
         }
 
         [JsonDerivedType(typeof(Field_short4), "short4")]
@@ -580,7 +768,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public int4 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (int4)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(int4);
         }
 
         [JsonDerivedType(typeof(Field_int4), "int4")]
@@ -592,7 +784,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public long4 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (long4)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(long4);
         }
 
         [JsonDerivedType(typeof(Field_long4), "long4")]
@@ -604,7 +800,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public bool4 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (bool4)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(bool4);
         }
 
         [JsonDerivedType(typeof(Field_bool4), "bool4")]
@@ -616,7 +816,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public floatQ Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (floatQ)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(floatQ);
         }
 
         [JsonDerivedType(typeof(Field_floatQ), "floatQ")]
@@ -628,7 +832,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public doubleQ Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (doubleQ)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(doubleQ);
         }
 
         [JsonDerivedType(typeof(Field_doubleQ), "doubleQ")]
@@ -640,7 +848,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public float2x2 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (float2x2)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(float2x2);
         }
 
         [JsonDerivedType(typeof(Field_float2x2), "float2x2")]
@@ -652,7 +864,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public double2x2 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (double2x2)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(double2x2);
         }
 
         [JsonDerivedType(typeof(Field_double2x2), "double2x2")]
@@ -664,7 +880,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public float3x3 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (float3x3)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(float3x3);
         }
 
         [JsonDerivedType(typeof(Field_float3x3), "float3x3")]
@@ -676,7 +896,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public double3x3 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (double3x3)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(double3x3);
         }
 
         [JsonDerivedType(typeof(Field_double3x3), "double3x3")]
@@ -688,7 +912,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public float4x4 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (float4x4)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(float4x4);
         }
 
         [JsonDerivedType(typeof(Field_float4x4), "float4x4")]
@@ -700,7 +928,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public double4x4 Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (double4x4)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(double4x4);
         }
 
         [JsonDerivedType(typeof(Field_double4x4), "double4x4")]

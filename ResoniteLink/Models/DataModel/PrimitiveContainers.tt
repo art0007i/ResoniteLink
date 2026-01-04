@@ -96,7 +96,11 @@ namespace ResoniteLink
             [JsonPropertyName("value")]
             public <#=type#> Value { get; set; }
 
-            public override object BoxedValue => Value;
+            [JsonIgnore]
+            public override object BoxedValue { get => Value; set => Value = (<#=type#>)value; }
+
+            [JsonIgnore]
+            public override Type ValueType => typeof(<#=type#>);
         }
 
         [JsonDerivedType(typeof(Field_<#=type#>), "<#=type#>")]

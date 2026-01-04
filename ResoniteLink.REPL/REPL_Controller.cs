@@ -54,22 +54,7 @@ namespace ResoniteLink
         
         async Task<bool> ProcessCommand(string command)
         {
-            command = command.Trim();
-
-            var spaceIndex = command.IndexOf(' ');
-
-            string keyword, arguments;
-
-            if(spaceIndex < 0)
-            {
-                keyword = command;
-                arguments = null;
-            }
-            else
-            {
-                keyword = command.Substring(0, spaceIndex);
-                arguments = command.Substring(spaceIndex + 1).Trim();
-            }
+            SplitCommand(command, out var keyword, out var arguments);
 
             // Normalize it, so we are case insensitive
             keyword = keyword.ToLowerInvariant();
@@ -181,6 +166,24 @@ namespace ResoniteLink
 
                     await SelectSlot(CurrentSlot.Parent.TargetID);
 
+                    break;
+
+                case "set":
+                    if(CurrentComponent == null)
+                    {
+                        Console.WriteLine("No component is selected");
+                        break;
+                    }
+
+                    SplitCommand(arguments, out var memberName, out var setValue);
+
+                    if(setValue == null)
+                    {
+                        Console.WriteLine("Invalid number of arguments. Usage: set <MemberName> <Value as JSON>");
+                        break;
+                    }
+
+                    await SetMember(memberName, setValue);
                     break;
 
                 case "exit":
@@ -356,8 +359,90 @@ namespace ResoniteLink
                     break;
 
                 default:
-                    Console.WriteLine("Unsupported member type: " + member.GetType());
+                    Console.WriteLine("Unsupported member type: " + member.GetType().Name);
                     break;
+            }
+        }
+
+        async Task SetMember(string name, string value)
+        {
+            if (CurrentComponent == null)
+                throw new InvalidOperationException("No component is currently selected");
+
+            if(!CurrentComponent.Members.TryGetValue(name, out var member))
+            {
+                Console.WriteLine($"Member '{name}' doesn't exist");
+                return;
+            }
+
+            Member setData;
+
+            switch(member)
+            {
+                case Field_Enum fieldEnum:
+                    // A bit special handling for this, because we don't have the actual types
+                    // so we just passthrough the value
+                    setData = new Field_Enum() { Value = value };
+                    break;
+
+                case Field field:
+                    try
+                    {
+                        // We just use JSON to simplify the parsing. This could be swapped out for "nicer"
+                        // serialization and parsing, but this will do for purposes of example
+                        var setField = (Field)Activator.CreateInstance(member.GetType());
+                        setField.BoxedValue = System.Text.Json.JsonSerializer.Deserialize(value, field.ValueType);
+
+                        setData = setField;
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine($"Failed to parse value: {ex.Message}");
+                        return;
+                    }
+                    break;
+
+                case Reference reference:
+                    setData = new Reference() { TargetID = value.Trim() };
+                    break;
+
+                default:
+                    Console.WriteLine($"Setting members of type {GetType().Name} is not supported");
+                    return;
+            }
+
+            setData.ID = member.ID;
+
+            var setComponent = new Component();
+            setComponent.ID = CurrentComponent.ID;
+
+            setComponent.Members = new Dictionary<string, Member>();
+            setComponent.Members.Add(name, setData);
+
+            var result = await _link.UpdateComponent(new UpdateComponent()
+            {
+                Data = setComponent
+            });
+
+            if (!result.Success)
+                Console.WriteLine($"Error: " + result.ErrorInfo);
+        }
+
+        static void SplitCommand(string command, out string keyword, out string arguments)
+        {
+            command = command.Trim();
+
+            var spaceIndex = command.IndexOf(' ');
+
+            if (spaceIndex < 0)
+            {
+                keyword = command;
+                arguments = null;
+            }
+            else
+            {
+                keyword = command.Substring(0, spaceIndex);
+                arguments = command.Substring(spaceIndex + 1).Trim();
             }
         }
     }

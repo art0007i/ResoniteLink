@@ -13,7 +13,12 @@ namespace ResoniteLink
         [JsonPropertyName("enumType")]
         public string EnumType { get; set; }
 
-        public override object BoxedValue => Value;
+        [JsonIgnore]
+        public override object BoxedValue { get => Value; set => Value = value as string; }
+
+        // We don't actually have the enum type, so we just give general enum type
+        [JsonIgnore]
+        public override Type ValueType => typeof(Enum);
     }
 
     [JsonDerivedType(typeof(Field_Enum), "enum")]

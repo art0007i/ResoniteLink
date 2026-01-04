@@ -8,6 +8,9 @@ namespace ResoniteLink
     public abstract class Field : Member
     {
         [JsonIgnore]
-        public abstract object BoxedValue { get; }
+        public abstract object BoxedValue { get; set; }
+
+        [JsonIgnore]
+        public abstract Type ValueType { get; }
     }
 }
