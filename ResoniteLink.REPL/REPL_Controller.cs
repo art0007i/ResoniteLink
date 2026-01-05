@@ -176,6 +176,39 @@ namespace ResoniteLink
                     await RemoveCurrentSlot();
                     break;
 
+                case "removecomponent":
+                    string idToRemove;
+
+                    if(string.IsNullOrWhiteSpace(arguments))
+                    {
+                        if(CurrentComponent == null)
+                        {
+                            Console.WriteLine("No component is currently selected. Either select component first or provide index of component to remove.");
+                            break;
+                        }
+
+                        idToRemove = CurrentComponent.ID;
+                    }
+                    else
+                    {
+                        if (!int.TryParse(arguments, out componentIndex))
+                        {
+                            Console.WriteLine("Could not parse component index");
+                            break;
+                        }
+
+                        if (componentIndex < 0 || componentIndex >= (CurrentSlot.Components?.Count ?? 0))
+                        {
+                            Console.WriteLine("Component Index is out of range");
+                            break;
+                        }
+
+                        idToRemove = CurrentSlot.Components[componentIndex].ID;
+                    }
+
+                    await RemoveComponent(idToRemove);
+                    break;
+
                 case "selectparent":
                     if(CurrentSlot.Parent.TargetID == null)
                     {
@@ -468,6 +501,19 @@ namespace ResoniteLink
 
             if (!result.Success)
                 Console.WriteLine($"Error: " + result.ErrorInfo);
+        }
+
+        async Task RemoveComponent(string componentId)
+        {
+            var result = await _link.RemoveComponent(new RemoveComponent()
+            {
+                ComponentID = componentId
+            });
+
+            if (!result.Success)
+                Console.WriteLine($"Failed to remove component: {result.ErrorInfo}");
+            else if (CurrentComponent?.ID == componentId)
+                CurrentComponent = null;
         }
 
         static void SplitCommand(string command, out string keyword, out string arguments)
