@@ -19,17 +19,17 @@ The protocol closely follow's Resonite's data model and deconstructs it into pri
 
 ## Usecase examples
 - Unity/Unreal/Godot/Blender... SDK
--- You can bring existing content from those tools into Resonite easily
--- They will also allow integrating Resonite with other tools as part of your workflow
+    - You can bring existing content from those tools into Resonite easily
+    - They will also allow integrating Resonite with other tools as part of your workflow
 - Procedural world/asset generation with external tools
 - External scripts controlling a world during live events
 - Monitoring state of the world with external tools
 - Twitch chat integration
--- With the REPL classes, you can let Twitch chat control the Resonite world at fine level - at your own risk :3
+    - With the REPL classes, you can let Twitch chat control the Resonite world at fine level - at your own risk :3
 - External utilities & tools for processing worlds
 - Use Resonite as visualization tool for external tools
--- E.g. 3D scanning software can easily send data to Resonite for realtime VR visualization
--- Any tool will benefit from free collaboration & network synchronization and fully built VR interactions without having to build this by itself
+    - E.g. 3D scanning software can easily send data to Resonite for realtime VR visualization
+    - Any tool will benefit from free collaboration & network synchronization and fully built VR interactions without having to build this by itself
 
 ## Does this replace in-game building?
 No. 
@@ -58,18 +58,18 @@ We will be using this library for other official projects, such as Unity SDK for
 The protocol is not complete and additional functionality will be added over time. Some crucial for certain use-cases and some convenience to make certain use-patterns easier. Here are some features that are currently planned to be added at some point:
 
 - Support more data model types
--- Arrays
--- Dictionaries
--- SyncVars
+    - Arrays
+    - Dictionaries
+    - SyncVars
 - Asset API for generating/importing assets externally (Textures, Meshes, Audio, Animations...)
--- Reading assets will not likely be supported until we introduce more robust asset protection system
+    - Reading assets will not likely be supported until we introduce more robust asset protection system
 - Type reflection - ability to fetch list and structure of supported component types by the current instance
--- You'll be able to use this for component type hinting for your tooling
--- It will also be useful for generating strongly typed bindings for tools
+    - You'll be able to use this for component type hinting for your tooling
+    - It will also be useful for generating strongly typed bindings for tools
 - Type validation
--- Resonite follows the C# type system, which could be complex to emulate in other languages. The API will allow you to let Resonite validate types
+    - Resonite follows the C# type system, which could be complex to emulate in other languages. The API will allow you to let Resonite validate types
 - Screenshot capture API
--- When connected to graphical client of Resonite a command will allow requesting render of the scene from particular viewpoint
+    - When connected to graphical client of Resonite a command will allow requesting render of the scene from particular viewpoint
 - Optionally monitoring fields for changes
 - Sending messages from Resonite to ResoniteLink for custom handling of events
 
@@ -78,7 +78,7 @@ The protocol is not complete and additional functionality will be added over tim
 - It forms a session with easy back & forth communication
 - Allows either side to initiate sending a message (as compared to HTTP REST API for example)
 - Allows sending binary messages
--- These allow for more efficient implementation of sending asset data
+    - These allow for more efficient implementation of sending asset data
 
 # Why JSON?
 - It's very ubiquitous and supported in pretty much every common language, often with multiple libraries to choose from
@@ -96,10 +96,10 @@ If you'd like to help us and other community members, there's a number of ways t
 We'll accept certain contributions to this repository if they meet our quality standards. Such as:
 - Improving documentation of the models
 - Adding core helper/utility classes
--- E.g. analogous to the REPL_Controller or LinkInterface
--- They need to be general and reusable components - if they are very use-case specific, we might recommend making a separate library instead
+    - E.g. analogous to the REPL_Controller or LinkInterface
+    - They need to be general and reusable components - if they are very use-case specific, we might recommend making a separate library instead
 - Adding helper methods to the models
--- E.g. to make certain common interactions easier (e.g. simpler parsing for engine primitives)
+    - E.g. to make certain common interactions easier (e.g. simpler parsing for engine primitives)
 
 We reserve right to reject any contributions if we feel they are not suitable for this repository - however you can always publish them as your own library!
 
@@ -119,13 +119,13 @@ However in a number of cases it's easier to run the code to generate Resonite da
 
 ## Pros of in-game importers
 - Seamless integration
--- Just drag & drop file into Resonite and it imports with a in-game importer guide
--- More efficient and easier implementation - it has full access to Resonite's classes and helper methods for assets
+    - Just drag & drop file into Resonite and it imports with a in-game importer guide
+    - More efficient and easier implementation - it has full access to Resonite's classes and helper methods for assets
 
 ## Pros of ResoniteLink importers
 - Can run within source tool without relying on export/exchange formats
 - Currently it's easier to build them, without need for modding Resonite
--- This will change in the future as we plan to make the import/export system modular & open source
+    - This will change in the future as we plan to make the import/export system modular & open source
 - Can be written in any language, not just C# (and other CLR languages)
 
 # Community project/library links
