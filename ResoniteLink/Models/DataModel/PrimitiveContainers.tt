@@ -9,6 +9,11 @@
 // Modify the .tt template instead!
 
 <#
+HashSet<string> nonNullableTypes = new HashSet<string>()
+{
+    "string"
+};
+
 List<string> standaloneTypes = new List<string>
 {
     "byte",
@@ -102,6 +107,28 @@ namespace ResoniteLink
             [JsonIgnore]
             public override Type ValueType => typeof(<#=type#>);
         }
+
+        <#
+        if(!nonNullableTypes.Contains(type))
+        {
+        #>
+            public class Field_Nullable_<#=type#> : Field
+            {
+                [JsonPropertyName("value")]
+                public <#=type#>? Value { get; set; }
+
+                [JsonIgnore]
+                public override object BoxedValue { get => Value; set => Value = value as <#=type#>?; }
+
+                [JsonIgnore]
+                public override Type ValueType => typeof(<#=type#>?);
+            }
+
+            [JsonDerivedType(typeof(Field_Nullable_<#=type#>), "<#=type#>?")]
+            public partial class Member { }
+            <#
+        }
+        #>
 
         [JsonDerivedType(typeof(Field_<#=type#>), "<#=type#>")]
         public partial class Member { }
