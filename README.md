@@ -97,7 +97,7 @@ We will be using this library for other official projects, such as Unity SDK for
 # Getting started (quick examples)
 Here are some example JSON messages to give you some idea for the protocol.
 
-We recommend looking at the [Models folder](tree/master/ResoniteLink/Models) in the repository to get full understanding of supported messages and [reading the documentation.](https://yellow-dog-man.github.io/ResoniteLink/).
+We recommend looking at the [Models folder](ResoniteLink/Models) in the repository to get full understanding of supported messages and [reading the documentation.](https://yellow-dog-man.github.io/ResoniteLink/).
 
 ## Querying Slot data
 To fetch information about the scene hierarchy, you can use the `getSlot` message:
