@@ -18,6 +18,6 @@ If you create object (slot, component) through ResoniteLink, you can assign it y
 
 You can also leave ID to be null when creating objects - Resonite will then allocate an ID. You'll need to query the object to learn this ID.
 
-Any Resonite IDs are prefixed with "Reso_". It's NOT recommended to use this prefix for ID's you'll allocate.
+Any Resonite IDs are prefixed with `Reso_`. It's NOT recommended to use this prefix for ID's you'll allocate.
 
 The IDs are NOT persistent. After saving the world and loading it again, they will be different.
