@@ -9,7 +9,7 @@ This stage won't likely run long. Once we're happy that we got some feedback, we
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![NuGet](https://img.shields.io/nuget/v/YellowDogMan.ResoniteLink.svg)](https://www.nuget.org/packages/YellowDogMan.ResoniteLink) [![GitHub deployments](https://img.shields.io/github/deployments/Yellow-Dog-Man/ResoniteLink/github-pages?style=flat&label=Documentation)](https://yellow-dog-man.github.io/ResoniteLink/)
 
 # What is Resonite?
-Resonite is a social VR sandbox where you can build anything in-game, realtime and with realtime collabration and implicit network synchronization. It is like being inside a virtual universe / game-engine that you have control over and that you can build together with your friends or colleagues.
+Resonite is a social VR sandbox where you can build anything in-game, realtime and with realtime collaboration and implicit network synchronization. It is like being inside a virtual universe / game-engine that you have control over and that you can build together with your friends or colleagues.
 
 Everything in Resonite is built around a shared data model - from the overall scene hierarchy, components to the individual fields - everything is accessible, modifiable and scriptable, giving users unprecedented level of control.
 
