@@ -9,6 +9,9 @@
   items:
     - href: websocket/components.md
     - href: websocket/slots.md
+- name: REPL
+  items:
+    - href: REPL/commands.md
 
 - name: Meta
 - name: GitHub
