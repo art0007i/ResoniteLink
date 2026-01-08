@@ -1,0 +1,15 @@
+name: 'Various checks for the repository'
+
+on:
+  push:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  secret-detection:
+    uses: Yellow-Dog-Man/composite-actions-templates/.github/workflows/secret-detection.yml@main
+    permissions:
+      contents: read
