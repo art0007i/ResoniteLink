@@ -253,6 +253,12 @@ namespace ResoniteLink
                     break;
 
                 case "importtexture":
+                    if(string.IsNullOrWhiteSpace(arguments))
+                    {
+                        Console.WriteLine("You must provide a path to the file");
+                        break;
+                    }
+
                     var path = System.IO.Path.GetFullPath(arguments);
 
                     if(!System.IO.File.Exists(path))
