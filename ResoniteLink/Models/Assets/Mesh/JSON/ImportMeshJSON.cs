@@ -11,7 +11,7 @@ namespace ResoniteLink
     /// convenience and ease of implementation & experimentation, at the cost of efficiency.
     /// If possible, it's recommended to use ImportMeshRawData for better efficiency.
     /// </summary>
-    public class ImportMesh : Message
+    public class ImportMeshJSON : Message
     {
         /// <summary>
         /// Vertices of this mesh. These are shared across sub-meshes
@@ -26,5 +26,12 @@ namespace ResoniteLink
         /// </summary>
         [JsonPropertyName("submeshes")]
         public List<Submesh> Submeshes { get; set; }
+
+        /// <summary>
+        /// Bones of the mesh when data represents a skinned mesh.
+        /// These will be referred to by their index from vertex data.
+        /// </summary>
+        [JsonPropertyName("bones")]
+        public List<Bone> Bones { get; set; }
     }
 }

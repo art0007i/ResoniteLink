@@ -43,5 +43,12 @@ namespace ResoniteLink
         /// </summary>
         [JsonPropertyName("uvs")]
         public List<UV_Coordinate> UVs { get; set; }
+
+        /// <summary>
+        /// Weights that define how much this vertex is affected by specific bones for skinned meshes.
+        /// The weights should add up to 1 across all the weights.
+        /// </summary>
+        [JsonPropertyName("boneWeights")]
+        public List<BoneWeight> BoneWeights { get; set; }
     }
 }

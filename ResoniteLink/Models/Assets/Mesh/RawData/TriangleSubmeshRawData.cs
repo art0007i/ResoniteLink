@@ -12,5 +12,7 @@ namespace ResoniteLink
         /// </summary>
         [JsonPropertyName("triangleCount")]
         public int TriangleCount { get; set; }
+
+        protected override int IndicieCount => TriangleCount * 3;
     }
 }
