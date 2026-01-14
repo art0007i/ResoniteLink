@@ -19,3 +19,4 @@
 - name: GitHub
   items:
     - href: meta/actions.md
+    - href: meta/security.md
