@@ -19,6 +19,9 @@ jobs:
     name: 'Build and publish library'
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+
     env:
       PROJECT_PATH: 'ResoniteLink'
       BUILD_TYPE: 'pack'
@@ -54,6 +57,9 @@ jobs:
 
     env:
       PROJECT_PATH: 'ResoniteLink.REPL'
+
+    permissions:
+      contents: write
 
     steps:
       - name: 'Checkout repository'
