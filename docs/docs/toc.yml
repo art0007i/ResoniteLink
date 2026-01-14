@@ -3,6 +3,8 @@
   href: started.md
 - name: Why is ResoniteLink that way?
   href: why.md
+- name: Setting up ResoniteLink within Resonite
+  href: setup.md
 
 - name: APIs
 - name: WebSocket API
@@ -17,3 +19,4 @@
 - name: GitHub
   items:
     - href: meta/actions.md
+    - href: meta/security.md
